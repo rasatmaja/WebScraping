@@ -25,10 +25,9 @@ def movies_search():
 
     if not isMatchFound:
         print(str(datetime.now()), "keyword not found")
-
-
-schedule.every(5).seconds.do(movies_search)
+    
+#schedule.every(5).seconds.do(movies_search)
+schedule.every().hour.do(movies_search)
 while 1:
     schedule.run_pending()
     time.sleep(1)
-
