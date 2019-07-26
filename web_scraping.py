@@ -6,7 +6,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 
-keyword_list = [["person", "of", "interest"], ["aquaman", "2018"], ["bumblebee", "2018"], ["gravity"],["cloverfield"]]
+keyword_list = [["person", "of", "interest"], ["aquaman", "2018"], ["bumblebee", "2018"]]
 def movies_search():
     http = urllib3.PoolManager(cert_reqs="CERT_REQUIRED", ca_certs=certifi.where())
     request = http.request("GET", "https://qxr.pw/hashes/")
@@ -22,14 +22,14 @@ def movies_search():
             if all(keyword in p.text.lower() for keyword in keywords):
                 print(str(datetime.now()), p.text)
                 isMatchFound = True
-                keyword_list.remove(keywords)
+                #keyword_list.remove(keywords)
                 #os.startfile(p['href'])
 
     if not isMatchFound:
         print(str(datetime.now()), "keyword not found")
     
-schedule.every(5).seconds.do(movies_search)
-#schedule.every().hour.do(movies_search)
+#schedule.every(5).seconds.do(movies_search)
+schedule.every().hour.do(movies_search)
 while 1:
     schedule.run_pending()
     time.sleep(1)
